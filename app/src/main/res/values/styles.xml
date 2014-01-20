@@ -1,0 +1,18 @@
+<resources>
+
+    <color name="HoloOrange">#FF8800</color>
+    <color name="Grey">#CCC</color>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/AppActionBar</item>
+        <item name="android:windowBackground">@color/Grey</item>
+    </style>
+
+    <style name="AppActionBar" parent="android:Widget.ActionBar">
+        <item name="android:background">@color/HoloOrange</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+</resources>

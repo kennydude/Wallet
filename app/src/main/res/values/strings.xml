@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Wallet</string>
+    <string name="subway_card_text">Subcard Points Balance</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="subway_card_info">To display your Subcard, you must have signed up on the Subcard UK website. http://subcard.subway.co.uk</string>
+    <string name="no_cards">You have no cards in your wallet. You should add one!</string>
+    <string name="new_card">New Card</string>
+    <string name="subway_card">Subcard UK</string>
+    <string name="save">Save</string>
+    <string name="verifying_card">Verifying card details...</string>
+    <string name="card_details_incorrect">The card details are not correct</string>
+    <string name="delete">Delete Card</string>
+    <string name="delete_confirm">Are you sure you wish to delete this card?</string>
+    <string name="deleted">Deleted</string>
+    <string name="card_created">Card Created</string>
+    <string name="testcard">Test Card</string>
+    <string name="points_balance">Points Balance</string>
+    <string name="clubcard_postcode_info">Entering your postcode is optional. If you enter it, we can fetch your balance. (Blame Tesco)</string>
+    <string name="clubcard_number">Tesco Clubcard Number</string>
+    <string name="postcode">Postcode</string>
+    <string name="problem_with_barcode">Barcode could not be generated</string>
+    <string name="clubcard">Tesco Clubcard</string>
+</resources>

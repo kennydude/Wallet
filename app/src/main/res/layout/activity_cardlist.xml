@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".ActivityCardList">
+
+    <TextView
+        style="@android:style/TextAppearance.Large"
+        android:text="@string/no_cards"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="15dp"
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout
+        android:id="@+id/ptr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/cards"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:paddingBottom="@dimen/card_margin"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+        </ScrollView>
+    </uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>
+
+</FrameLayout>

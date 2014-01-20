@@ -1,0 +1,3 @@
+[submodule "ormdroid"]
+	path = ormdroid
+	url = https://github.com/roscopeco/ormdroid.git

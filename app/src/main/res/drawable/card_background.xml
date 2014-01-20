@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@drawable/card_background_hover"
+        android:state_pressed="true" />
+
+    <item
+        android:drawable="@drawable/card_background_hover"
+        android:state_hovered="true" />
+
+    <item
+        android:drawable="@drawable/card_background_std" />
+
+</selector>

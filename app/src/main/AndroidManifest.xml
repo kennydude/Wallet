@@ -1,0 +1,42 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="me.kennydude.wallet">
+
+    <application
+        android:name=".WalletApplication"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:icon="@drawable/ic_launcher"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".ActivityCardList">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/new_card"
+            android:name=".ActivityCardAdd" />
+
+        <!-- Start edit screens -->
+
+        <activity android:name=".subwayuk.EditSubwayCard" />
+        <activity android:name=".subwayuk.ViewSubwayCard" />
+
+        <activity android:name=".testcard.EditTestCard" />
+        <activity android:name=".testcard.ViewTestCard" />
+
+        <activity android:name=".clubcard.EditClubcard" />
+        <activity android:name=".clubcard.ViewClubcard" />
+
+        <!-- End edit screens -->
+
+        <meta-data
+            android:name="ormdroid.database.name"
+            android:value="kennydude_wallet.db" />
+
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>
