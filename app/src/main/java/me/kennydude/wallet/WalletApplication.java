@@ -2,6 +2,8 @@ package me.kennydude.wallet;
 
 import android.app.Application;
 
+import com.path.android.jobqueue.JobManager;
+import com.path.android.jobqueue.config.Configuration;
 import com.roscopeco.ormdroid.ORMDroidApplication;
 
 import java.io.File;
@@ -11,9 +13,16 @@ import java.io.File;
  */
 public class WalletApplication extends Application {
 
+	public static JobManager jobcentre;
+	public static WalletApplication instance;
+
 	@Override
 	public void onCreate (){
 		super.onCreate();
+
+		instance = this;
+		jobcentre = new JobManager(this);
+
 		ORMDroidApplication.initialize(this);
 	}
 

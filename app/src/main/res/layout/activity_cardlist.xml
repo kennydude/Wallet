@@ -26,6 +26,7 @@
             android:layout_height="match_parent">
             <LinearLayout
                 android:id="@+id/cards"
+                android:animateLayoutChanges="true"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:paddingBottom="@dimen/card_margin"

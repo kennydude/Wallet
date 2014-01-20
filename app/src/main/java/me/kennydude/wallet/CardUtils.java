@@ -27,6 +27,7 @@ import me.kennydude.wallet.testcard.TestCard;
 public class CardUtils {
 	public static final String ACTION_NEW_CARD = "me.kennydude.wallet.NEW_CARD";
 	public static final String ACTION_EDIT_CARD = "me.kennydude.wallet.EDIT_CARD";
+	public static final String ACTION_CARD_REFRESHED = "me.kennydude.wallet.CARD_IS_RENEWED";
 	public static List<CardDescription> cards = new ArrayList<CardDescription>();
 	public static Map<String, Integer> cardIndexMap = new HashMap<String, Integer>();
 

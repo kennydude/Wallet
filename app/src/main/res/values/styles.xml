@@ -8,10 +8,20 @@
         <!-- Customize your theme here. -->
         <item name="android:actionBarStyle">@style/AppActionBar</item>
         <item name="android:windowBackground">@color/Grey</item>
+        <item name="ptrHeaderStyle">@style/AppPtrHeader</item>
+    </style>
+
+    <style name="AppPtrHeader" parent="android:Widget">
+        <item name="ptrProgressBarColor">@color/HoloOrange</item>
     </style>
 
     <style name="AppActionBar" parent="android:Widget.ActionBar">
         <item name="android:background">@color/HoloOrange</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:titleTextStyle">@style/AppTitleTextStyle</item>
+    </style>
+
+    <style name="AppTitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textColor">#FFFFFF</item>
     </style>
 

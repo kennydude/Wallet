@@ -1,6 +1,9 @@
 package me.kennydude.wallet;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,19 +16,22 @@ import java.util.List;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
+import uk.co.senab.actionbarpulltorefresh.library.*;
+import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 
 /**
  * @author kennydude
  */
-public class ActivityCardList extends BaseActivity {
-	//private PullToRefreshLayout mPullToRefreshLayout;
+public class ActivityCardList extends BaseActivity implements OnRefreshListener {
+	private PullToRefreshLayout mPullToRefreshLayout;
+	public int refreshRemaining = 0;
 
 	@Override
 	public void onCreate(Bundle bis){
 		super.onCreate(bis);
 		setContentView(R.layout.activity_cardlist);
 
-		/*mPullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.ptr);
+		mPullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.ptr);
 
 		// Now setup the PullToRefreshLayout
 		ActionBarPullToRefresh.from(this)
@@ -34,9 +40,50 @@ public class ActivityCardList extends BaseActivity {
 						// Set the OnRefreshListener
 				.listener(this)
 						// Finally commit the setup to our PullToRefreshLayout
-				.setup(mPullToRefreshLayout);*/
+				.setup(mPullToRefreshLayout);
 
 		refreshCards();
+	}
+
+	@Override
+	public void onResume(){
+		super.onResume();
+
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(CardUtils.ACTION_CARD_REFRESHED);
+		registerReceiver(broadcastReceiver, filter);
+	}
+
+	@Override
+	public void onPause(){
+		super.onPause();
+		unregisterReceiver(broadcastReceiver);
+	}
+
+	public BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			refreshRemaining -= 1;
+			if(refreshRemaining <= 0){
+				mPullToRefreshLayout.setRefreshComplete();
+				refreshCards();
+			}
+		}
+	};
+
+	@Override
+	public void onRefreshStarted(View view){
+		Utils.debug("Refreshing...");
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				List<CardUtils.StoredCard> cards = Entity.query(CardUtils.StoredCard.class).executeMulti();
+				for(CardUtils.StoredCard c : cards){
+					refreshRemaining += 1;
+					WalletApplication.jobcentre.addJobInBackground(new RefreshCardTask(c.id));
+				}
+			}
+		}).start();
 	}
 
 	LinearLayout cardList;
