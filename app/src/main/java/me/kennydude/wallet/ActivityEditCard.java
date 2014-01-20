@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import me.kennydude.wallet.R;
 
 import me.kennydude.wallet.CardUtils;
@@ -110,7 +113,7 @@ public abstract class ActivityEditCard<T extends Card> extends BaseActivity {
 					@Override
 					public void run() {
 						pd.dismiss();
-						Toast.makeText(ActivityEditCard.this, R.string.card_details_incorrect, Toast.LENGTH_LONG).show();
+						Crouton.makeText(ActivityEditCard.this, R.string.card_details_incorrect, Style.ALERT).show();
 					}
 				});
 
