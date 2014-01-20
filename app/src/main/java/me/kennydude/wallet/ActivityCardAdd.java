@@ -45,6 +45,7 @@ public class ActivityCardAdd extends ListActivity {
 	@Override
 	public void onCreate(Bundle bis){
 		super.onCreate(bis);
+		getActionBar().setIcon(R.drawable.ic_app);
 
 		caa = new CardArrayAdapter(this);
 		setListAdapter(caa);

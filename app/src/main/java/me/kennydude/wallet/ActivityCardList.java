@@ -157,9 +157,13 @@ public class ActivityCardList extends BaseActivity implements OnRefreshListener 
 
 	@Override
 	public boolean  onOptionsItemSelected (MenuItem item){
-		if(item.getItemId() == R.id.new_card){
-			startActivityForResult(new Intent(this, ActivityCardAdd.class), 1);
-			return true;
+		switch(item.getItemId()){
+			case R.id.new_card:
+				startActivityForResult(new Intent(this, ActivityCardAdd.class), 1);
+				return true;
+			case R.id.open_source:
+				startActivity(new Intent(this, ActivityOpenSource.class));
+				return true;
 		}
 		return false;
 	}

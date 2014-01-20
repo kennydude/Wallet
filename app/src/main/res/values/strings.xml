@@ -21,4 +21,5 @@
     <string name="postcode">Postcode</string>
     <string name="problem_with_barcode">Barcode could not be generated</string>
     <string name="clubcard">Tesco Clubcard</string>
+    <string name="open_source">Open Source</string>
 </resources>

@@ -17,6 +17,8 @@
         <activity
             android:label="@string/new_card"
             android:name=".ActivityCardAdd" />
+        <activity android:name=".ActivityOpenSource"
+                  android:label="@string/open_source" />
 
         <!-- Start edit screens -->
 

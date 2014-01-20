@@ -8,5 +8,11 @@ import android.os.Bundle;
  */
 public class BaseActivity extends Activity {
 
+	@Override
+	public void onCreate(Bundle bis){
+		super.onCreate(bis);
+
+		getActionBar().setIcon(R.drawable.ic_app);
+	}
 
 }

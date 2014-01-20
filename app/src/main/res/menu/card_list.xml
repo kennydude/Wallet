@@ -8,4 +8,9 @@
         android:showAsAction="always"
         android:icon="@drawable/ic_action_content_new" />
 
+    <item
+        android:id="@+id/open_source"
+        android:title="@string/open_source"
+        android:showAsAction="never" />
+
 </menu>
