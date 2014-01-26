@@ -37,3 +37,5 @@ Just make sure you allow the activity to do it's thing, it's pretty good at it's
 
 This shows the contents of your card once tapped. This is usually a barcode generated, and a simple
 `ActivityViewBarcode` is provided for you.
+
+If you want a custom activity, override `ActivityViewCard` and override `showCard()`. This method is used because we want the screen to refresh if the card is updated.
