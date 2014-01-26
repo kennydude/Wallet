@@ -7,4 +7,9 @@
         android:showAsAction="never"
         android:title="@string/delete" />
 
+    <item
+        android:id="@+id/refresh"
+        android:showAsAction="never"
+        android:title="@string/refresh" />
+
 </menu>

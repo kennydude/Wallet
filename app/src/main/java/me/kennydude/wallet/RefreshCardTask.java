@@ -26,17 +26,22 @@ public class RefreshCardTask extends Job {
 
 	@Override
 	public void onRun() throws Throwable {
-		CardUtils.StoredCard sc = Entity.query(CardUtils.StoredCard.class).where(eql("id", cardID)).execute();
-		if(sc == null) throw new Exception("NULL CARD!!! HELP!!!");
+		try{
+			CardUtils.StoredCard sc = Entity.query(CardUtils.StoredCard.class).where(eql("id", cardID)).execute();
+			if(sc == null) throw new Exception("NULL CARD!!! HELP!!!");
 
-		Card realCard = sc.getCard();
-		if(!realCard.refreshData()){
+			Card realCard = sc.getCard();
+			if(!realCard.refreshData()){
+				throw new Exception("Refresh Failed");
+			}
+			sc.setCard(realCard);
+			sc.save();
+
+			WalletApplication.instance.sendBroadcast(new Intent(CardUtils.ACTION_CARD_REFRESHED));
+		} catch(Exception e){
+			e.printStackTrace();
 			throw new Exception("Refresh Failed");
 		}
-		sc.setCard(realCard);
-		sc.save();
-
-		WalletApplication.instance.sendBroadcast(new Intent(CardUtils.ACTION_CARD_REFRESHED));
 	}
 
 	@Override

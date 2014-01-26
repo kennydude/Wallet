@@ -16,8 +16,10 @@
         </activity>
         <activity
             android:label="@string/new_card"
+            android:parentActivityName=".ActivityCardList"
             android:name=".ActivityCardAdd" />
         <activity android:name=".ActivityOpenSource"
+                  android:parentActivityName=".ActivityCardList"
                   android:label="@string/open_source" />
 
         <!-- Start edit screens -->
@@ -30,6 +32,12 @@
 
         <activity android:name=".clubcard.EditClubcard" />
         <activity android:name=".clubcard.ViewClubcard" />
+
+        <activity android:name=".nectar.EditNectarCard" />
+        <activity android:name=".nectar.ViewNectarCard" />
+
+        <activity android:name=".thegym.EditTheGymCard" />
+        <activity android:name=".thegym.ViewTheGymCard" />
 
         <!-- End edit screens -->
 

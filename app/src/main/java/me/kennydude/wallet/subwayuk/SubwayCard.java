@@ -2,6 +2,7 @@ package me.kennydude.wallet.subwayuk;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.kevinsawicki.http.HttpRequest;
@@ -36,8 +37,14 @@ public class SubwayCard extends Card {
 
 	@Override
 	public View getCardView(LayoutInflater inflater) {
-		View card = inflater.inflate(R.layout.card_subcard_uk, null);
-		((TextView)card.findViewById(R.id.points)).setText( totalPoints );
+		View card = inflater.inflate(R.layout.card_generic_points, null);
+		((ImageView)card.findViewById(R.id.logo)).setImageResource(R.drawable.subway_logo);
+		TextView x = (TextView) card.findViewById(R.id.points);
+		x.setText(totalPoints);
+
+		x = (TextView)card.findViewById(R.id.text);
+		x.setText(R.string.subway_card_text);
+
 		return card;
 	}
 
@@ -73,6 +80,11 @@ public class SubwayCard extends Card {
 	@Override
 	public Class<? extends ActivityViewCard> getViewActivity() {
 		return ViewSubwayCard.class;
+	}
+
+	@Override
+	public int getName() {
+		return R.string.subway_card;
 	}
 
 }

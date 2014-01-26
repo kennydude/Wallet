@@ -27,7 +27,7 @@ public class TescoClubcard extends Card {
 
 	@Override
 	public View getCardView(LayoutInflater inflater) {
-		View card = inflater.inflate(R.layout.card_clubcard_view, null);
+		View card = inflater.inflate(R.layout.card_generic_points, null);
 		if(postcode.isEmpty()){
 			// TODO: Better view!
 			((TextView)card.findViewById(R.id.points)).setText( "todo" );
@@ -69,5 +69,10 @@ public class TescoClubcard extends Card {
 	@Override
 	public Class<? extends ActivityViewCard> getViewActivity() {
 		return ViewClubcard.class;
+	}
+
+	@Override
+	public int getName() {
+		return R.string.clubcard;
 	}
 }

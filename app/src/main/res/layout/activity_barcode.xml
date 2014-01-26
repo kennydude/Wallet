@@ -2,7 +2,7 @@
 
 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
            android:layout_width="match_parent"
-           android:scaleType="fitCenter"
+           android:scaleType="centerInside"
            android:src="@drawable/ic_launcher"
            android:padding="10dp"
            android:id="@+id/image"

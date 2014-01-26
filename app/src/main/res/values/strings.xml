@@ -22,4 +22,16 @@
     <string name="problem_with_barcode">Barcode could not be generated</string>
     <string name="clubcard">Tesco Clubcard</string>
     <string name="open_source">Open Source</string>
+    <string name="surname">Surname</string>
+    <string name="nectar_card_number">Nectar Card Number</string>
+    <string name="nectar_card">Nectar Card</string>
+    <string name="nectar_prefix">98263000</string>
+    <string name="nectar_details">You have a total of {points} points, which are worth £{worth}</string>
+    <string name="new_x_card">New {card}</string>
+    <string name="the_gym">The Gym</string>
+    <string name="the_gym_pin">Entry PIN</string>
+    <string name="the_gym_email_info">Entering your email address is optional, but it allows us to download your gym usage</string>
+    <string name="entry">Entry on {date}</string>
+    <string name="exit">Exit</string>
+    <string name="refresh">Refresh</string>
 </resources>

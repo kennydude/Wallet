@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:background="@drawable/card_background"
-              android:layout_width="match_parent"
-              android:layout_margin="@dimen/card_margin"
-              android:layout_height="@dimen/card_height">
+                android:background="@drawable/card_background"
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/card_margin"
+                android:layout_height="@dimen/card_height">
 
     <ImageView
-        android:src="@drawable/subway_logo"
+        android:src="@drawable/tesco_clubcard_logo"
         android:id="@+id/logo"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:scaleType="fitCenter"
         android:layout_alignParentLeft="true"
         android:layout_height="40dp" />
@@ -21,7 +21,8 @@
         android:gravity="center"
         android:layout_alignBottom="@+id/logo"
         android:layout_alignTop="@+id/logo"
-        android:text="@string/subway_card_text"
+        android:text="@string/points_balance"
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

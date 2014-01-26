@@ -44,4 +44,9 @@ public abstract class Card {
 	 */
 	public abstract Class<? extends ActivityViewCard> getViewActivity();
 
+	/**
+	 * Get the name of the card
+	 * @return String resource of card
+	 */
+	public abstract int getName();
 }

@@ -19,9 +19,8 @@ public class ViewSubwayCard extends ActivityViewBarcode<SubwayCard> {
 		// Make a writer
 		AztecWriter writer = new AztecWriter();
 
-		// Square to the smallest element
-		Utils.debug(width + "x" + height);
-		int x = Math.min(width, height);
+		// Should be big enough for subway stores
+		int x = Math.min(500, 500);
 
 		// Make the barcode
 		BitMatrix matrix = writer.encode( getCard().getSubcardNumber(), BarcodeFormat.AZTEC, x, x );

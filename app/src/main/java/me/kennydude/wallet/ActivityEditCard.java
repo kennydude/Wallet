@@ -35,15 +35,16 @@ public abstract class ActivityEditCard<T extends Card> extends BaseActivity {
 	public void onCreate(Bundle bis){
 		super.onCreate(bis);
 
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		setContentView(getEditorLayout());
 
 		if(getIntent().getAction().equals(CardUtils.ACTION_EDIT_CARD)){
 			// TODO: Load card and stuff
 
 		} else{
-			setTitle(R.string.new_card);
 			newCardMode = true;
 			createNewCard();
+			setTitle(getString(R.string.new_x_card).replace("{card}", getString(theCard.getName())));
 		}
 	}
 
@@ -55,10 +56,17 @@ public abstract class ActivityEditCard<T extends Card> extends BaseActivity {
 
 	@Override
 	public boolean onOptionsItemSelected (MenuItem item){
-		if(item.getItemId() == R.id.save){
-			// Validate it
-			validateCardAndSave();
-			return true;
+		switch(item.getItemId()){
+			case android.R.id.home:
+				// Up we go!
+				Intent up = new Intent(this, ActivityCardList.class);
+				up.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(up); finish();
+				break;
+			case R.id.save:
+				// Validate it
+				validateCardAndSave();
+				return true;
 		}
 		return false;
 	}
@@ -107,7 +115,9 @@ public abstract class ActivityEditCard<T extends Card> extends BaseActivity {
 
 						return;
 					}
-				} catch (Exception e){}
+				} catch (Exception e){
+					e.printStackTrace();
+				}
 
 				runOnUiThread(new Runnable() {
 					@Override

@@ -35,4 +35,9 @@ public class TestCard extends Card {
 	public Class<? extends ActivityViewCard> getViewActivity() {
 		return ViewTestCard.class;
 	}
+
+	@Override
+	public int getName() {
+		return R.string.testcard;
+	}
 }

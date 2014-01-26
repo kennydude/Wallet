@@ -25,7 +25,10 @@ public abstract class ActivityViewBarcode<T extends Card> extends ActivityViewCa
 		lp.screenBrightness = 1.0f;
 
 		getWindow().setAttributes(lp);
+	}
 
+	@Override
+	public void showCard(){
 		setContentView(R.layout.activity_barcode);
 		barcode = (ImageView) findViewById(R.id.image);
 	}
