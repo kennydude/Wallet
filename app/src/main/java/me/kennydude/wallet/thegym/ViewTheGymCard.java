@@ -28,6 +28,12 @@ public class ViewTheGymCard extends ActivityViewCard<TheGymCard> {
 			return String.format("%.2f",i).replace(".", ":");
 		}
 
+		String pd(int i){
+			String r = i + "";
+			if(r.length() == 1) r = "0"+r;
+			return r;
+		}
+
 		@Override
 		public View getView (int position, View convertView, ViewGroup parent){
 			if(convertView == null){
@@ -40,7 +46,7 @@ public class ViewTheGymCard extends ActivityViewCard<TheGymCard> {
 			tv.setText( formatTFloat(sess.startHour) );
 
 			tv = (TextView) convertView.findViewById(R.id.entry_lbl);
-			tv.setText( getContext().getString(R.string.entry).replace("{date}", sess.day + "/" + sess.month + "/" + sess.year) );
+			tv.setText( getContext().getString(R.string.entry).replace("{date}", pd(sess.day) + "/" + pd(sess.month) + "/" + sess.year) );
 
 			tv = (TextView) convertView.findViewById(R.id.exit);
 			tv.setText( formatTFloat(sess.endHour) );

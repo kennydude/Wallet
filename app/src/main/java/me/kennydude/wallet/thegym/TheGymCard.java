@@ -74,13 +74,13 @@ public class TheGymCard extends Card {
 		for(Element visit : myUsage){
 			GymSession session = new GymSession();
 
-			SimpleDateFormat sdf = new SimpleDateFormat("d/MM/y HH:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat("d/MM/yyyy HH:mm:ss");
 
 			String time = visit.child(0).text();
 			Date x = sdf.parse(time);
 
 			session.year = x.getYear();
-			session.month = x.getMonth();
+			session.month = x.getMonth()+1;
 			session.day = x.getDate();
 
 			session.startHour = x.getHours() + ( (float)x.getMinutes() / 100 );
