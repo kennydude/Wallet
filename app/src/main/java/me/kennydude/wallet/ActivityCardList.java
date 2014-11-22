@@ -2,28 +2,28 @@ package me.kennydude.wallet;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.cocosw.bottomsheet.BottomSheet;
+import com.github.mrengineer13.snackbar.SnackBar;
 import com.roscopeco.ormdroid.Entity;
 
 import java.util.List;
 
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
-import uk.co.senab.actionbarpulltorefresh.library.*;
-import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
-
 /**
  * @author kennydude
  */
-public class ActivityCardList extends BaseActivity implements OnRefreshListener {
-	private PullToRefreshLayout mPullToRefreshLayout;
+public class ActivityCardList extends BaseActivity {
+	private SwipeRefreshLayout mPullToRefreshLayout;
 	public int refreshRemaining = 0;
 
 	@Override
@@ -31,16 +31,26 @@ public class ActivityCardList extends BaseActivity implements OnRefreshListener 
 		super.onCreate(bis);
 		setContentView(R.layout.activity_cardlist);
 
-		mPullToRefreshLayout = (PullToRefreshLayout) findViewById(R.id.ptr);
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
 
-		// Now setup the PullToRefreshLayout
-		ActionBarPullToRefresh.from(this)
-				// Mark All Children as pullable
-				.allChildrenArePullable()
-						// Set the OnRefreshListener
-				.listener(this)
-						// Finally commit the setup to our PullToRefreshLayout
-				.setup(mPullToRefreshLayout);
+		mPullToRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.ptr);
+		mPullToRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				Utils.debug("Refreshing...");
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						List<CardUtils.StoredCard> cards = Entity.query(CardUtils.StoredCard.class).executeMulti();
+						for(CardUtils.StoredCard c : cards){
+							refreshRemaining += 1;
+							WalletApplication.jobcentre.addJobInBackground(new RefreshCardTask(c.id));
+						}
+					}
+				}).start();
+			}
+		});
 
 		refreshCards();
 	}
@@ -65,26 +75,11 @@ public class ActivityCardList extends BaseActivity implements OnRefreshListener 
 		public void onReceive(Context context, Intent intent) {
 			refreshRemaining -= 1;
 			if(refreshRemaining <= 0){
-				mPullToRefreshLayout.setRefreshComplete();
+				mPullToRefreshLayout.setRefreshing(false);
 				refreshCards();
 			}
 		}
 	};
-
-	@Override
-	public void onRefreshStarted(View view){
-		Utils.debug("Refreshing...");
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				List<CardUtils.StoredCard> cards = Entity.query(CardUtils.StoredCard.class).executeMulti();
-				for(CardUtils.StoredCard c : cards){
-					refreshRemaining += 1;
-					WalletApplication.jobcentre.addJobInBackground(new RefreshCardTask(c.id));
-				}
-			}
-		}).start();
-	}
 
 	LinearLayout cardList;
 
@@ -159,7 +154,30 @@ public class ActivityCardList extends BaseActivity implements OnRefreshListener 
 	public boolean  onOptionsItemSelected (MenuItem item){
 		switch(item.getItemId()){
 			case R.id.new_card:
-				startActivityForResult(new Intent(this, ActivityCardAdd.class), 1);
+				//startActivityForResult(new Intent(this, ActivityCardAdd.class), 1);
+				BottomSheet.Builder builder = new BottomSheet.Builder(this)
+						.title(R.string.choose_card);
+
+				int i = 0;
+				for( CardUtils.CardDescription cd : CardUtils.cards ){
+					builder.sheet(i, cd.stringId);
+					i++;
+				}
+
+				builder.listener(new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialogInterface, int which) {
+						try {
+							Intent i = new Intent(ActivityCardList.this, CardUtils.cards.get(which).cls.newInstance().getEditActivity());
+							i.setAction(CardUtils.ACTION_NEW_CARD);
+							startActivityForResult(i, 1);
+						} catch (Exception e){
+							e.printStackTrace();
+						}
+					}
+
+				}).show();
 				return true;
 			case R.id.open_source:
 				startActivity(new Intent(this, ActivityOpenSource.class));
@@ -172,7 +190,8 @@ public class ActivityCardList extends BaseActivity implements OnRefreshListener 
 	protected void onActivityResult (int requestCode, int resultCode, Intent data){
 		if(resultCode == RESULT_OK){
 			if(data.hasExtra("msg")){
-				Crouton.makeText(this, data.getIntExtra("msg", -1), Style.CONFIRM).show();
+				SnackBar sb = new SnackBar(this);
+				sb.show(getString(data.getIntExtra("msg", -1)));
 			}
 			refreshCards();
 		}

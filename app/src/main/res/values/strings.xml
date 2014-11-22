@@ -34,4 +34,13 @@
     <string name="entry">Entry on {date}</string>
     <string name="exit">Exit</string>
     <string name="refresh">Refresh</string>
+    <string name="medicine_card">Medicine Usage</string>
+    <string name="name">Name</string>
+    <string name="medicine_card_setup">Enter a name for this card. Usually this is a person\'s name, so you can store multiple people\'s records</string>
+    <string name="card_edited">Card updated</string>
+    <string name="medicine_usage">Medicine Usage</string>
+    <string name="choose_card">Choose Card Type</string>
+    <string name="back">Back</string>
+    <string name="edit_x_card">Edit {card}</string>
+    <string name="edit">Edit</string>
 </resources>

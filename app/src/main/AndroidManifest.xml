@@ -14,10 +14,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:label="@string/new_card"
-            android:parentActivityName=".ActivityCardList"
-            android:name=".ActivityCardAdd" />
         <activity android:name=".ActivityOpenSource"
                   android:parentActivityName=".ActivityCardList"
                   android:label="@string/open_source" />

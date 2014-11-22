@@ -4,15 +4,21 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
+import com.github.mrengineer13.snackbar.SnackBar;
+import com.roscopeco.ormdroid.Entity;
+
 import me.kennydude.wallet.R;
 
 import me.kennydude.wallet.CardUtils;
+
+import static com.roscopeco.ormdroid.Query.eql;
 
 /**
  * Deals with editing cards
@@ -22,6 +28,7 @@ import me.kennydude.wallet.CardUtils;
 public abstract class ActivityEditCard<T extends Card> extends BaseActivity {
 	public boolean newCardMode = false;
 	public T theCard;
+	public CardUtils.StoredCard storedCard;
 
 	public T getCard(){
 		return theCard;
@@ -35,16 +42,34 @@ public abstract class ActivityEditCard<T extends Card> extends BaseActivity {
 	public void onCreate(Bundle bis){
 		super.onCreate(bis);
 
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		setContentView(getEditorLayout());
+		LinearLayout lv = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_edit, null);
+		lv.addView(
+			getLayoutInflater().inflate(getEditorLayout(), null),
+			new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.MATCH_PARENT,
+					LinearLayout.LayoutParams.MATCH_PARENT
+			)
+		);
+		setContentView(lv);
+
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		toolbar.setNavigationIcon(R.drawable.ic_check_white_24dp);
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				validateCardAndSave();
+			}
+		});
 
 		if(getIntent().getAction().equals(CardUtils.ACTION_EDIT_CARD)){
-			// TODO: Load card and stuff
-
+			storedCard = Entity.query(CardUtils.StoredCard.class).where(eql("id", getIntent().getIntExtra("id", -1))).execute();
+			setCard((T) storedCard.getCard());
+			toolbar.setTitle(getString(R.string.edit_x_card).replace("{card}", getString(theCard.getName())));
 		} else{
 			newCardMode = true;
 			createNewCard();
-			setTitle(getString(R.string.new_x_card).replace("{card}", getString(theCard.getName())));
+			toolbar.setTitle(getString(R.string.new_x_card).replace("{card}", getString(theCard.getName())));
 		}
 	}
 
@@ -90,19 +115,19 @@ public abstract class ActivityEditCard<T extends Card> extends BaseActivity {
 						// If we could refresh, we'll save it
 						// aka: good refresh = save
 
-						CardUtils.StoredCard sc;
 						if(newCardMode){
-							sc = new CardUtils.StoredCard();
+							storedCard = new CardUtils.StoredCard();
 						} else {
-							sc = new CardUtils.StoredCard();
-							// TODO: implement correctly
+							// Don't think anything is required
 						}
 
-						sc.setCard(theCard);
-						sc.save();
+						storedCard.setCard(theCard);
+						storedCard.save();
 
 						if(newCardMode){
 							setResult(RESULT_OK, new Intent().putExtra("msg", R.string.card_created));
+						} else{
+							setResult(RESULT_OK, new Intent().putExtra("msg", R.string.card_edited));
 						}
 
 						runOnUiThread(new Runnable() {
@@ -123,7 +148,8 @@ public abstract class ActivityEditCard<T extends Card> extends BaseActivity {
 					@Override
 					public void run() {
 						pd.dismiss();
-						Crouton.makeText(ActivityEditCard.this, R.string.card_details_incorrect, Style.ALERT).show();
+						SnackBar sb = new SnackBar(ActivityEditCard.this);
+						sb.show(getString(R.string.card_details_incorrect));
 					}
 				});
 

@@ -1,39 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              tools:context=".ActivityCardList">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        style="@android:style/TextAppearance.Large"
-        android:text="@string/no_cards"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:padding="15dp"
-        android:id="@+id/empty"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="@string/app_name" />
 
-    <uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout
-        android:id="@+id/ptr"
+    <FrameLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ScrollView
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ActivityCardList">
+
+        <TextView
+            android:id="@+id/empty"
+            style="@android:style/TextAppearance.Large"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="@string/no_cards"/>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/ptr"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <LinearLayout
-                android:id="@+id/cards"
-                android:animateLayoutChanges="true"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:paddingBottom="@dimen/card_margin"
-                android:layout_height="wrap_content">
 
-            </LinearLayout>
-        </ScrollView>
-    </uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
 
-</FrameLayout>
+                <LinearLayout
+                    android:id="@+id/cards"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/card_margin">
+
+                </LinearLayout>
+            </ScrollView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </FrameLayout>
+</LinearLayout>

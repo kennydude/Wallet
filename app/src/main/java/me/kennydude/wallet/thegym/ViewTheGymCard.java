@@ -68,7 +68,9 @@ public class ViewTheGymCard extends ActivityViewCard<TheGymCard> {
 		lv.addHeaderView(getCard().getCardView(getLayoutInflater()));
 
 		gsa = new GymSessionAdapter(this);
-		gsa.addAll(getCard().usage);
+		if(getCard().usage != null) {
+			gsa.addAll(getCard().usage);
+		}
 
 		lv.setAdapter(gsa);
 		gsa.notifyDataSetInvalidated();

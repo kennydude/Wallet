@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 import me.kennydude.wallet.clubcard.TescoClubcard;
+import me.kennydude.wallet.medicine.MedicineUsageCard;
 import me.kennydude.wallet.nectar.NectarCard;
 import me.kennydude.wallet.subwayuk.SubwayCard;
 import me.kennydude.wallet.testcard.TestCard;
@@ -36,6 +37,7 @@ public class CardUtils {
 	static{
 		// Please ensure they are in alphabetical order!
 		cards.add(new CardDescription(R.string.the_gym, TheGymCard.class, "thegymgroup"));
+		cards.add(new CardDescription(R.string.medicine_card, MedicineUsageCard.class, "pillz"));
 		cards.add(new CardDescription(R.string.nectar_card, NectarCard.class, "nectaruk"));
 		cards.add(new CardDescription(R.string.subway_card, SubwayCard.class, "subcarduk"));
 		cards.add(new CardDescription(R.string.clubcard, TescoClubcard.class, "clubcarduk"));

@@ -1,40 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:background="@drawable/card_background"
-                android:layout_width="match_parent"
-                android:layout_margin="@dimen/card_margin"
-                android:layout_height="@dimen/card_height">
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/card_margin"
+    android:layout_height="@dimen/card_height"
+    card_view:cardCornerRadius="2dp">
 
-    <ImageView
-        android:src="@drawable/tesco_clubcard_logo"
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:scaleType="fitCenter"
-        android:layout_alignParentLeft="true"
-        android:layout_height="40dp" />
-
-    <TextView
-        android:paddingLeft="5dp"
-        style="@android:style/TextAppearance.Medium"
-        android:layout_toRightOf="@+id/logo"
-        android:gravity="center"
-        android:layout_alignBottom="@+id/logo"
-        android:layout_alignTop="@+id/logo"
-        android:text="@string/points_balance"
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:text="...."
-        android:textSize="80sp"
-        android:gravity="center"
+    <RelativeLayout
+        android:padding="8dp"
         android:layout_width="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/logo"
-        android:id="@+id/points"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <ImageView
+            android:src="@drawable/tesco_clubcard_logo"
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:scaleType="fitCenter"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_height="40dp" />
+
+        <TextView
+            android:paddingLeft="5dp"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_toEndOf="@+id/logo"
+            android:layout_toRightOf="@+id/logo"
+            android:gravity="center"
+            android:layout_alignBottom="@+id/logo"
+            android:layout_alignTop="@+id/logo"
+            android:text="@string/points_balance"
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            tools:text="...."
+            android:textSize="80sp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/logo"
+            android:id="@+id/points"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

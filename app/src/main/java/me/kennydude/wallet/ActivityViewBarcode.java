@@ -6,8 +6,7 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
+import com.github.mrengineer13.snackbar.SnackBar;
 
 /**
  * @author kennydude
@@ -47,7 +46,8 @@ public abstract class ActivityViewBarcode<T extends Card> extends ActivityViewCa
 						runOnUiThread(new Runnable() {
 							@Override
 							public void run() {
-								Crouton.makeText(ActivityViewBarcode.this, getString(R.string.problem_with_barcode), Style.ALERT).show();
+								SnackBar sb = new SnackBar(ActivityViewBarcode.this);
+								sb.show(getString(R.string.problem_with_barcode));
 							}
 						});
 					}
